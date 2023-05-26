@@ -20,17 +20,11 @@ const organizationSchema = new mongoose.Schema(
       type: String,
       default: "./uploads/organization/organization.png",
     },
-    events: {
-      type: [Object],
-    },
-    members: {
+    eventsId: {
       type: [String],
     },
-    membersCount: {
-      type: Number,
-    },
-    eventsCount: {
-      type: Number,
+    membersId: {
+      type: [String],
     }
   },
   {
