@@ -28,10 +28,10 @@ const eventSchema = new mongoose.Schema(
       type: String, 
     },
     date: {
-      type: [String],
+      type: [String]
     },
     time: {
-      type: [String],
+      type: [String]
     },
     donationType: {
       type: [String],

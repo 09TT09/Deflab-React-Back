@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
+const { isEmail, isMobilePhone } = require("validator");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema(
   {
     email: {
       type: String,
       required: true,
+      validate: [isEmail],
       lowercase: true,
       unique: true,
       trim: true,
@@ -27,6 +30,10 @@ const userSchema = new mongoose.Schema(
       maxlength: 100,
       trim: true,
     },
+    birthday: {
+      type: Date,
+      required: true,
+    },
     picture: {
       type: String,
       default: "./uploads/profil/user.png",
@@ -35,20 +42,49 @@ const userSchema = new mongoose.Schema(
       type: Number,
       trim: true,
     },
-    relations: {
-      type:[Object],
+    userType: {
+      type: Number,
+      required: true,
     },
-    organizations: {
-      type: [Object],
+    relationsId: {
+      type:[String],
     },
-    event: {
-      type: [Object],
+    organizationsId: {
+      type: [String],
+    },
+    eventId: {
+      type: [String],
+    },
+    organizationOrganizerId: {
+      type: String,
+    },
+    hideSensitiveInformation: {
+      type: Boolean,
+      default: true
     },
   },
   {
     timestamps: true,
   }
 );
+
+userSchema.pre("save", async function (next) {
+  const salt = await bcrypt.genSalt();
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+userSchema.statics.login = async function(email, password) {
+  const user = await this.findOne({ email });
+  if (user) {
+    const auth = await bcrypt.compare(password, user.password);
+    if (auth) {
+      return user;
+    }
+    throw Error('Mot de passe incorrect !');
+  }
+  throw Error('Email incorrect !');
+}
 
 const UserModel = mongoose.model("User", userSchema);
 module.exports = UserModel;
