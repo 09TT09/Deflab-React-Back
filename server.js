@@ -1,5 +1,5 @@
 // LIBRARIES
-require('dotenv').config({ path: './config/.env' });
+require('dotenv').config({ path: '.env' });
 require("./config/database.js");
 const express = require('express');
 const app = express();
