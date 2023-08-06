@@ -13,7 +13,7 @@ const organizationsRoutes = require('./routes/organizations.route');
 const {checkUser, requireAuth} = require('./middleware/auth.middleware');
 
 // CORS
-/*
+
 const corsOptions = {
   origin: "https://deflab-82309.web.app",
   credentials: true,
@@ -23,8 +23,8 @@ const corsOptions = {
   'preflightContinue': false
 }
 app.use(cors(corsOptions));
-*/
-app.use(cors());
+
+//app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
