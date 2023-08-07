@@ -15,7 +15,7 @@ const {checkUser, requireAuth} = require('./middleware/auth.middleware');
 // CORS
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://deflab-82309.web.app",
   credentials: true,
   'allowedHeaders' : ['sessionId', 'Content-Type'],
   'exposedHeaders' : ['sessionId'],
