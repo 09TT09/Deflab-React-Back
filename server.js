@@ -15,7 +15,7 @@ const {checkUser, requireAuth} = require('./middleware/auth.middleware');
 // CORS
 
 const corsOptions = {
-  origin: "http://localhost:3000/",
+  origin: "http://localhost:3000",
   credentials: true,
   'allowedHeaders' : ['sessionId', 'Content-Type'],
   'exposedHeaders' : ['sessionId'],
