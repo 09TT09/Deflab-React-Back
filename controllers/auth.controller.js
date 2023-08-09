@@ -30,11 +30,12 @@ module.exports.login = async (request, response) => {
   const { email, password } = request.body;
 
   try {
+    console.log(user._id, email, password)
     const user = await UserModel.login(email, password);
     const token = createToken(user._id);
     response.cookie("jwt", token, { httpOnly: true, maxAge: maxAge, secure: true });
     const success = "Connexion réussie."
-    response.status(201).json({ user: user._id });
+    response.status(201).send({ user: user._id });
   } catch (error) {
     console.log(error)
     const errors = loginErrors(error);
