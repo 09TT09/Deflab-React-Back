@@ -32,7 +32,7 @@ module.exports.login = async (request, response) => {
   try {
     const user = await UserModel.login(email, password);
     const token = createToken(user._id);
-    response.cookie("jwt", token, { httpOnly: true, maxAge: maxAge, Secure });
+    response.cookie("jwt", token, { httpOnly: true, maxAge: maxAge, secure: true });
     const success = "Connexion réussie."
     response.status(201).json({ user: user._id });
   } catch (error) {
