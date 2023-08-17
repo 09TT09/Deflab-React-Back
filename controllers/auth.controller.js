@@ -37,6 +37,7 @@ module.exports.login = async (request, response) => {
     console.log(token, email);
     response.cookie("jwt", token, { httpOnly: true, maxAge: maxAge, secure: true });
     const success = "Connexion réussie."
+    console.log("3 : " + user._id)
     response.status(201).json({ user: user._id });
   } catch (error) {
     console.log(error)
