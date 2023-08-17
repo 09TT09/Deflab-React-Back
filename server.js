@@ -3,17 +3,10 @@ require('dotenv').config({ path: '.env' });
 require("./config/database.js");
 const express = require('express');
 const app = express();
-const cookieParser = require('cookie-parser');
 const cors = require('cors');
-
-// COMPONENTS
-const usersRoutes = require('./routes/users.route');
-const eventsRoutes = require('./routes/events.route');
-const organizationsRoutes = require('./routes/organizations.route');
-const {checkUser, requireAuth} = require('./middleware/auth.middleware');
+const cookieParser = require('cookie-parser');
 
 // CORS
-
 const corsOptions = {
   origin: "https://deflab-82309.web.app",
   credentials: true,
@@ -23,6 +16,12 @@ const corsOptions = {
   'preflightContinue': false
 }
 app.use(cors(corsOptions));
+
+// COMPONENTS
+const usersRoutes = require('./routes/users.route');
+const eventsRoutes = require('./routes/events.route');
+const organizationsRoutes = require('./routes/organizations.route');
+const {checkUser, requireAuth} = require('./middleware/auth.middleware');
 
 //app.use(cors());
 
