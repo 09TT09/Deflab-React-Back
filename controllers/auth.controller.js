@@ -32,7 +32,7 @@ module.exports.login = async (request, response) => {
   try {
     const user = await UserModel.login(email, password);
     const token = createToken(user._id);
-    response.cookie("jwt", token, { httpOnly: true, maxAge: maxAge, secure: true, sameSite: "lax" });
+    response.cookie("jwt", token, { httpOnly: true, maxAge: maxAge, secure: true, sameSite: "None" });
     const success = "Connexion réussie."
     response.status(201).json({ user: user._id });
   } catch (error) {
@@ -43,6 +43,6 @@ module.exports.login = async (request, response) => {
 
 // LOGOUT
 module.exports.logout = (request, response) => {
-  response.cookie("jwt", "", { maxAge: 1, sameSite: "lax", secure: true });
+  response.cookie("jwt", "", { maxAge: 1, sameSite: "None", secure: true });
   response.redirect("/");
 };
