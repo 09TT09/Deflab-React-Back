@@ -7,7 +7,7 @@ module.exports.checkUser = (request, response, next) => {
     jwt.verify(token, process.env.TOKEN_SECRET, async (error, decodedToken) => {
       if (error) {
         response.locals.user = null;
-        response.cookie("jwt", "", { maxAge: 1 });
+        response.cookie("jwt", "", { maxAge: 1, sameSite: "lax", secure: true });
         next();
       }
       else {
